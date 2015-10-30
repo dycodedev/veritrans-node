@@ -1,0 +1,21 @@
+{
+  "name": "veritrans-nodejs",
+  "version": "0.1.0",
+  "description": "veritrans integration library",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dycodedev/veritrans-node.git"
+  },
+  "keywords": [
+    "veritrans",
+    "payment",
+    "integration"
+  ],
+  "author": "Alwin Arrasyid <alwin.ridd@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dycodedev/veritrans-node/issues"
+  },
+  "homepage": "https://github.com/dycodedev/veritrans-node#readme"
+}
