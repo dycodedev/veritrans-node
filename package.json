@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "veritrans integration library",
   "main": "index.js",
+  "scripts": {
+    "test": "mocha test/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dycodedev/veritrans-node.git"
@@ -17,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/dycodedev/veritrans-node/issues"
   },
-  "homepage": "https://github.com/dycodedev/veritrans-node#readme"
+  "homepage": "https://github.com/dycodedev/veritrans-node#readme",
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3"
+  }
 }
