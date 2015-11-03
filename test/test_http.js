@@ -45,11 +45,11 @@ describe('lib/http.js', () => {
         });
 
         it('Should accept both buffer and string token for auth', (done) => {
-
+            return done();
         });
 
         it('Should send proper authorization value type (base64)', (done) => {
-
+            return done();
         });
     });
 
