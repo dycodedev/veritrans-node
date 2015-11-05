@@ -28,6 +28,8 @@
     "sinon": "^1.17.2"
   },
   "dependencies": {
-    "superagent": "^1.4.0"
+    "async": "^1.5.0",
+    "superagent": "^1.4.0",
+    "valid-url": "^1.0.9"
   }
 }
