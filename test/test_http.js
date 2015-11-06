@@ -100,7 +100,7 @@ describe('lib/http.js', () => {
             ];
 
             async.each(auth, (authorization, cb) => {
-                libHttp.get('`${fakeBase}/', {}, { authorization }, (err, response) => {
+                libHttp.get(`${fakeBase}/`, {}, { authorization }, (err, response) => {
                     expect(err).not.to.be.null;
                     return cb();
                 });
@@ -108,11 +108,42 @@ describe('lib/http.js', () => {
         });
 
         it('Should send proper authorization value type (base64)', (done) => {
-            return done();
+            fakeServer
+                .matchHeader('Authorization', value => {
+                    const splitted = value.split(' ');
+
+                    expect(base64RegEx.test(splitted[1])).to.equal(true);
+
+                    return base64RegEx.test(splitted[1]);
+                })
+                .get('/authorization')
+                .reply(200, '');
+
+            const authorization = 'username:password';
+
+            libHttp.get(`${fakeBase}/authorization`, {}, {authorization}, (err, response) => {
+                expect(err).to.be.null;
+                expect(response.status).to.equal(200);
+                return done();
+            });
         });
 
         it('Should merge parameters to existing querystring in url', (done) => {
-            return done();
+            fakeServer
+                .get('/querystring')
+                .query(true)
+                .reply(200, (uri, requestBody) => {
+                    return `${fakeBase}${uri}`;
+                });
+
+            libHttp.get(`${fakeBase}/querystring?name=alwin`, {nick: 'winter'}, {}, (err, response) => {
+                const querystring = libHttp.getQueryFromUrl(response.text);
+
+                expect(err).to.be.null;
+                expect(utils.hasProperty(querystring, ['name', 'nick'])).to.equal(true);
+
+                return done();
+            });
         });
 
         after(done => {
