@@ -12,7 +12,6 @@ describe('lib/http.js', () => {
     const fakeBase = 'http://127.0.0.1:8000';
     let fakeServer;
 
-    // Built in URL object ships with Node.js v5.0.0 :|
     describe('getQueryFromUrl(url)', () => {
         it('Should accepts only string', () => {
             expect(libHttp.getQueryFromUrl({})).to.equal(false);
