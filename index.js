@@ -2,50 +2,42 @@
 
 const _ = require('lodash');
 
-const utils = require('./lib/utils');
-const http = require('./lib/http');
-
 function Veritrans(options) {
     if (!utils.hasProperty(options, ['url', 'merchantId', 'clientKey', 'serverKey'])) {
-        throw new Error('options must contains url, serverKey and serverPass property!');
+        throw new Error('options must contains url, serverKey and serverKey property!');
     }
 
     this.baseURL = options.URL;
-    this.credentials = _.pick(options, ['serverKey', 'serverPass']);
+    this.credentials = _.pick(options, ['serverKey', 'clientKey', 'merchantId']);
 }
 
-Veritrans.prototype.credentials = {
-    setServerPass(serverPass) {
-        this.credentials.serverPass = serverPass;
+Veritrans.prototype.credential = {
+    setServerKey(serverKey) {
+        this.credentials.serverKey = serverKey;
     },
 
-    getServerPass() {
-        return this.credentials.serverPass;
+    getServerKey() {
+        return this.credentials.serverKey;
     },
 
-    setServerKey
+    setClientKey(clientKey) {
+        this.credentials.clientKey = serverKey;
+    },
+
+    getClientKey() {
+        return this.credentials.clientKey;
+    },
+
+    setMerchantId(id) {
+        this.credentials.merchantId = id;
+    }
+
+    getMerchantId() {
+        return this.credentials.merchantId;
+    }
 };
 
 Veritrans.prototype.transaction = {
-
-    status(orderId, callback) {
-        http.get(`${this.baseURL}/${orderId}/status`, {}, this.prototype.credentials, (err, response) => {
-            if (err) {
-                return callback(err);
-            }
-
-            const body = response.body;
-
-            if (body.status_code >= 400) {
-                const error = new Error(body.status_message);
-                error.statusCode = body.status_code;
-
-                return callback(error);
-            }
-
-            return callback(null, body);
-        });
-    },
 };
 
 module.exports = Veritrans;
