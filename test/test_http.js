@@ -36,7 +36,7 @@ describe('lib/http.js', () => {
         });
     });
 
-    describe('get(url, params, options, callback)', (done) => {
+    describe('get(url, params, options, callback)', done => {
         beforeEach(done => {
             fakeServer = nock(fakeBase);
 
@@ -141,6 +141,21 @@ describe('lib/http.js', () => {
                 expect(err).to.be.null;
                 expect(utils.hasProperty(querystring, ['name', 'nick'])).to.equal(true);
 
+                return done();
+            });
+        });
+
+        it('Should pass if authorization token is in veritrans\' style', done => {
+            fakeServer
+                .get('/authorization')
+                .reply(200, 'Success!');
+
+            const opt = {
+                authorization: 'username:',
+            };
+
+            libHttp.get(`${fakeBase}/authorization`, {}, opt, (err, response) => {
+                expect(err).to.be.null;
                 return done();
             });
         });
