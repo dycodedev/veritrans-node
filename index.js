@@ -30,7 +30,7 @@ Veritrans.prototype.credential = {
 
     setMerchantId(id) {
         this.credentials.merchantId = id;
-    }
+    },
 
     getMerchantId() {
         return this.credentials.merchantId;
