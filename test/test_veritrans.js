@@ -10,17 +10,20 @@ const vt = new Veritrans(config);
 
 describe('index.js', () => {
     describe('Veritrans', () => {
-        it('Should have transaction properties', () => {
+        it('Should have transaction property', () => {
             expect(vt.transaction).to.be.an('object');
             expect(vt.transaction).not.to.be.empty;
+
+            expect(vt.transaction.status).to.be.a('function');
+            expect(vt.transaction.charge).to.be.a('function');
         });
 
-        it('Should have credential properties', () => {
+        it('Should have credential property', () => {
             expect(vt.credential).to.be.an('object');
             expect(vt.credential).not.to.be.empty;
         });
 
-        it('Should property change credential properties', () => {
+        it('Should property change credential property', () => {
             vt.credential.setServerKey('Aha');
             expect(vt.credential.getServerKey()).to.equal('Aha');
 

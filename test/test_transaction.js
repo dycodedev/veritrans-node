@@ -14,7 +14,8 @@ const validTransactIds = [
     'Sample Order-1',
 ]
 
-describe('lib/vt/transaction.js', () => {
+describe('lib/vt/transaction.js', function() {
+    this.timeout(30000);
 
     describe('status(id, callback)', () => {
         it('Should carry error if using invalid order id', done => {
