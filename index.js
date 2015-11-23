@@ -12,6 +12,7 @@ function Veritrans(options) {
     this.credentials = _.pick(options, ['serverKey', 'clientKey', 'merchantId']);
     this.transaction = require('./lib/vt/transaction')(this);
     this.credential = require('./lib/credential')(this);
+    this.creditcard = require('./lib/vt/creditcard')(this);
 }
 
 module.exports = Veritrans;
