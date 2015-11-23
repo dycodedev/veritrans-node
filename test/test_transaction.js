@@ -12,7 +12,8 @@ const vt = new Veritrans(config);
 // Change the values with your transaction ids,
 const validTransactIds = [
     'Sample Order-1',
-]
+    'Sample Order-2',
+];
 
 describe('lib/vt/transaction.js', function() {
     this.timeout(30000);
@@ -36,8 +37,8 @@ describe('lib/vt/transaction.js', function() {
         });
     });
 
-    describe('charge(payload, callback)', () => {
-        it('Should throw error if transaction_details fields are missing', done => {
+    describe('charge(payload, callback) on credit card', () => {
+        it('Should carry error if transaction_details fields are missing', done => {
             const payload = {
                 payment_type: 'credit_card',
                 credit_card: {
@@ -54,7 +55,7 @@ describe('lib/vt/transaction.js', function() {
             });
         });
 
-        it('Should throw error if credit_card fields are missing', done => {
+        it('Should carry error if credit_card fields are missing', done => {
             const payload = {
                 payment_type: 'credit_card',
                 transaction_details: {
@@ -68,6 +69,25 @@ describe('lib/vt/transaction.js', function() {
                 expect(body).to.be.undefined;
 
                 return done();
+            });
+        });
+    });
+
+    describe('approve(id, callback)', () => {
+        it('Should carry error if using invalid id', done => {
+            vt.transaction.approve('notavalidId', (err, body) => {
+                expect(err).not.to.be.null;
+                expect(body).to.be.undefined;
+
+                return done();
+            });
+        });
+
+        it('Should carry result if using valid id', done => {
+            vt.transaction.approve(validTransactIds[0], (err, body) => {
+                expect(err).to.be.null;
+                expect(body).not.to.be.undefined;
+                expect(body).to.be.an('object');
             });
         });
     });
