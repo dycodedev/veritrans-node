@@ -35,4 +35,40 @@ describe('lib/vt/transaction.js', function() {
             });
         });
     });
+
+    describe('charge(payload, callback)', () => {
+        it('Should throw error if transaction_details fields are missing', done => {
+            const payload = {
+                payment_type: 'credit_card',
+                credit_card: {
+                    token_id: 'Some token',
+                    bank: 'bni',
+                },
+            };
+
+            vt.transaction.charge(payload, (err, body) => {
+                expect(err).not.to.be.null;
+                expect(body).to.be.undefined;
+
+                return done();
+            });
+        });
+
+        it('Should throw error if credit_card fields are missing', done => {
+            const payload = {
+                payment_type: 'credit_card',
+                transaction_details: {
+                    order_id: 'some order',
+                    gross_amount: 25000
+                },
+            };
+
+            vt.transaction.charge(payload, (err, body) => {
+                expect(err).not.to.be.null;
+                expect(body).to.be.undefined;
+
+                return done();
+            });
+        });
+    });
 });
