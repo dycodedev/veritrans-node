@@ -7,5 +7,8 @@ All notable changes to this project will be documented in this file. This projec
 
 #### Added
 * Supported all payment method using single method `Veritrans.transaction.charge`.
+* Check status of a transaction / order.
+* Cancel transaction.
+* Approve transaction.
+* Capture transaction.
 * Validation on all required fields.
-*
