@@ -49,6 +49,10 @@ describe('lib/utils.js', () => {
             expect(utils.hasProperty(object, 'platform')).to.equal(true);
         });
 
+        it('should return true if `object` properties is matched with empty array', () => {
+            expect(utils.hasProperty(object, [])).to.equal(true);
+        });
+
     });
 
     describe('.toBase64(source)', () => {

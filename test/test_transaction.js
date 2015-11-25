@@ -29,7 +29,7 @@ describe('lib/vt/transaction.js', function() {
 
         it('Should carry results if using valid id', done => {
             vt.transaction.status(validTransactIds[0], (err, body) => {
-                expect(err).to.be.nulll
+                expect(err).to.be.null;
                 expect(body).not.to.be.empty;
 
                 return done();
@@ -71,6 +71,47 @@ describe('lib/vt/transaction.js', function() {
                 return done();
             });
         });
+    });
+
+    describe('charge(payload, callback) on bank transfer (permata va)', () => {
+        it('Should carry error `bank_transfer` field is missing', done => {
+            const payload = {
+                payment_type: 'bank_transfer',
+                transaction_details: {
+                    order_id: 'some order',
+                    gross_amount: 25000
+                },
+            };
+
+            vt.transaction.charge(payload, (err, body) => {
+                expect(err).not.to.be.null;
+                expect(body).to.be.undefined;
+
+                return done();
+            });
+        });
+
+        it('Should carry error fields in `bank_transfer` are missing', done => {
+            const payload = {
+                payment_type: 'bank_transfer',
+                bank_transfer: {
+                    'yay': 'yeee',
+                },
+                transaction_details: {
+                    order_id: 'some order',
+                    gross_amount: 25000
+                },
+            };
+
+            vt.transaction.charge(payload, (err, body) => {
+                expect(err).not.to.be.null;
+                expect(body).to.be.undefined;
+
+                return done();
+            });
+        });
+
+        it
     });
 
     describe('approve(id, callback)', () => {
