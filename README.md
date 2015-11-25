@@ -1,4 +1,4 @@
-veritrans-nodejs
+veritrans
 ================
 
 Veritrans integration library for node.js platform.

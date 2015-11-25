@@ -1,10 +1,10 @@
 {
-  "name": "veritrans-nodejs",
+  "name": "veritrans",
   "version": "0.1.0",
   "description": "veritrans integration library",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -24,8 +24,7 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "mocha": "^2.3.3",
-    "nock": "^2.17.0",
-    "sinon": "^1.17.2"
+    "nock": "^2.17.0"
   },
   "dependencies": {
     "async": "^1.5.0",
