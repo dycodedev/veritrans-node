@@ -2,6 +2,7 @@
 
 // NOTE: specify your own config file...
 // It must contains merchantId, clientKey, serverKey, and url.
+const async = require('async');
 const expect = require('chai').expect;
 const Veritrans = require('../');
 const utils = require('../lib/utils');
@@ -55,31 +56,11 @@ describe('lib/vt/transaction.js', function() {
             });
         });
 
-        it('Should carry error if credit_card fields are missing', done => {
+        it('Should carry error if `payment_type` is missing', done => {
             const payload = {
-                payment_type: 'credit_card',
                 transaction_details: {
                     order_id: 'some order',
-                    gross_amount: 25000
-                },
-            };
-
-            vt.transaction.charge(payload, (err, body) => {
-                expect(err).not.to.be.null;
-                expect(body).to.be.undefined;
-
-                return done();
-            });
-        });
-    });
-
-    describe('charge(payload, callback) on bank transfer (permata va)', () => {
-        it('Should carry error `bank_transfer` field is missing', done => {
-            const payload = {
-                payment_type: 'bank_transfer',
-                transaction_details: {
-                    order_id: 'some order',
-                    gross_amount: 25000
+                    gross_amount: 25000,
                 },
             };
 
@@ -91,27 +72,43 @@ describe('lib/vt/transaction.js', function() {
             });
         });
 
-        it('Should carry error fields in `bank_transfer` are missing', done => {
-            const payload = {
-                payment_type: 'bank_transfer',
-                bank_transfer: {
-                    'yay': 'yeee',
-                },
-                transaction_details: {
-                    order_id: 'some order',
-                    gross_amount: 25000
-                },
-            };
+        it('Should carry error if type field is missing', done => {
+            const requireAdditionalFields = [
+                'credit_card',
+                'bank_transfer',
+                'echannel',
+                'mandiri_clickpay',
+                'cimb_clicks',
+                'bca_klikpay',
+                'telkomsel_cash',
+                'indosat_dompetku',
+                'mandiri_ecash',
+                'vtweb',
+            ];
 
-            vt.transaction.charge(payload, (err, body) => {
-                expect(err).not.to.be.null;
-                expect(body).to.be.undefined;
+            async.each(requireAdditionalFields, (item, cb) => {
+                const payload = {
+                    transaction_details: {
+                        order_id: 'some order',
+                        gross_amount: 25000,
+                    },
 
+                    payment_type: item,
+                    [item]: {}
+                };
+
+                vt.transaction.charge(payload, (err, body) => {
+                    expect(err).not.to.be.null;
+                    expect(body).to.be.undefined;
+
+                    return cb(null);
+                });
+            },
+
+            err => {
                 return done();
             });
         });
-
-        it
     });
 
     describe('approve(id, callback)', () => {
