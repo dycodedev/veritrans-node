@@ -1,5 +1,5 @@
-veritrans
-================
+veritrans-node
+==============
 
 Veritrans integration library for node.js platform.
 
