@@ -12,3 +12,4 @@ All notable changes to this project will be documented in this file. This projec
 * Approve transaction.
 * Capture transaction.
 * Validation on all required fields.
+* Charge & check status API documentation.
