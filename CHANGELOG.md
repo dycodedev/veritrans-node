@@ -3,13 +3,13 @@ Project History
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-### Unreleased
+### 0.1.0
 
 #### Added
 * Supported all payment method using single method `Veritrans.transaction.charge`.
 * Check status of a transaction / order.
-* Cancel transaction.
-* Approve transaction.
-* Capture transaction.
+* Cancel transaction / order.
+* Approve transaction / order.
+* Capture transaction / order.
 * Validation on all required fields.
-* Charge & check status API documentation.
+* Basic usage & examples.

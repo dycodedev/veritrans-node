@@ -9,9 +9,11 @@ __Note:__ This module is written in ES6 standards, so in order to make it works 
 
 This module follows Veritrans official API documentation. Please see [this](http://docs.veritrans.co.id/en/api/methods.html) for API reference.
 
-### Status Codes
+### Install
 
-Please see [this](http://docs.veritrans.co.id/en/api/status_code.html) for status code reference.
+```
+npm install veritrans
+```
 
 ### Usage
 
