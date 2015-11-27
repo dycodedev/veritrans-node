@@ -39,11 +39,11 @@ const Veritrans = new require('veritrans')(config);
 
 #### 1. Charge transaction
 
-`Veritrans.transaction.charge(transaction, callback)` .All payment methods that are provided by Veritrans are supported by this module. Example below is using `credit_card` payment type.
+`Veritrans.transaction.charge(transaction, callback)` - All payment methods that are provided by Veritrans are supported by this module. Example below is using `credit_card` payment type.
 
 __Params__:
 
-* `transaction` (*Object*) - An object representing transaction payload. `payment_type`, `transaction_details` fields + one that is named after `payment_type` value __ARE MANDATORY__.
+* `transaction` (*Object*) - An object representing transaction payload. `payment_type`, `transaction_details` fields + one that is named after `payment_type` value are __required__.
 * `callback(err, response)` (*Function*) - Callback function that will be fired once transaction is finished.
 
 ```js
@@ -75,12 +75,12 @@ route.post('/pay', (req, res, next) => {
 
 #### 2. Check Transaction / Order Status
 
-`Veritrans.transaction.status(id, callback)` check the status of transaction / order that is identified by `id`.
+`Veritrans.transaction.status(id, callback)` - Check the status of transaction / order that is identified by `id`.
 
 __Params__:
 
 * `id` (*String*) - Identifier of a transaction / order.
-*  `callback(err, response)` (*Function*) - Callback function that will be called once the check process is finished.
+*  `callback(err, response)` (*Function*) - Callback function that will be called once the status is checked.
 
 ```js
 route.post('/status/:id', (req, res, next) => {
@@ -91,10 +91,121 @@ route.post('/status/:id', (req, res, next) => {
         if (err) {
             console.error(err);
 
-            return res.redirect('/pay/error');
+            return res.redirect('/transaction/' + req.params.id);
         }
 
-        return res.redirect('/pay/success')
+        return res.redirect('/transaction/' + req.params.id);
     });
 });
 ```
+
+#### 3. Capture Transaction
+
+`Veritrans.transaction.capture(payload, callback)` - Charge a pre-authorized transaction in which `transaction_status` is `authorize`.
+
+__Params__:
+
+* `payload` (*Object*) - Consists of `transaction_id` and `gross_amount` fields. `transaction_id` is required.
+* `callback(err, response)` (*Function*) - Callback function that will be called once transaction is captured.
+
+```js
+route.get('/capture/:id', (req, res, next) => {
+    const payload = {
+        transaction_id: req.params.id,
+        gross_amount: 100000,
+    };
+
+
+    Veritrans.transaction.capture(payload, (err, result) => {
+        if (err) {
+            console.error(err);
+
+            return res.redirect('/transaction/' + req.params.id);
+        }
+
+        return res.redirect('/transaction/' + req.params.id);
+    });
+});
+```
+
+#### 4. Approve Transaction
+
+`Veritrans.transaction.approve(id, callback)` - Accept card payment transaction in which the `fraud_status` is `challenge`.
+
+__Params__:
+
+* `id` (*String*) - Identifier of a transaction / order.
+*  `callback(err, response)` (*Function*) - Callback function that will be called once the transaction is approved.
+
+```js
+route.get('/approve/:id', (req, res, next) => {
+    const id = req.params.id;
+
+
+    Veritrans.transaction.approve(id, (err, result) => {
+        if (err) {
+            console.error(err);
+
+            return res.redirect('/transaction/' + req.params.id);
+        }
+
+        return res.redirect('/transaction/' + req.params.id);
+    });
+});
+```
+
+#### 5. Cancel Transaction
+
+`Veritrans.transaction.cancel(id, callback)` - Cancel card payment transaction if the transaction has not been settled yet.
+
+__Params__:
+
+* `id` (*String*) - Identifier of a transaction / order.
+*  `callback(err, response)` (*Function*) - Callback function that will be called once the transaction is canceled.
+
+```js
+route.get('/cancel/:id', (req, res, next) => {
+    const id = req.params.id;
+
+
+    Veritrans.transaction.cancel(id, (err, result) => {
+        if (err) {
+            console.error(err);
+
+            return res.redirect('/transaction/' + req.params.id);
+        }
+
+        return res.redirect('/transaction/' + req.params.id);
+    });
+});
+```
+
+#### 6. Expire Transaction
+
+`Veritrans.transaction.expire(id, callback)` - Expire a transaction which payment has not yet completed by the customer.
+
+__Params__:
+
+* `id` (*String*) - Identifier of a transaction / order.
+*  `callback(err, response)` (*Function*) - Callback function that will be called once the transaction is expired.
+
+```js
+route.get('/expire/:id', (req, res, next) => {
+    const id = req.params.id;
+
+
+    Veritrans.transaction.expire(id, (err, result) => {
+        if (err) {
+            console.error(err);
+
+            return res.redirect('/transaction/' + req.params.id);
+        }
+
+        return res.redirect('/transaction/' + req.params.id);
+    });
+});
+```
+
+### License
+
+MIT License
