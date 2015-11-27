@@ -1,7 +1,7 @@
 {
   "name": "veritrans",
   "version": "0.1.0",
-  "description": "veritrans integration library",
+  "description": "veritrans integration module for node.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
