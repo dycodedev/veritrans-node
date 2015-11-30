@@ -35,13 +35,14 @@ const config = {
     url: 'https://api.sandbox.veritrans.co.id/v2'
 };
 
-const Veritrans = new require('veritrans')(config);
+const Veritrans = require('veritrans');
+const vt = new Veritrans(config);
 
 ```
 
 #### 1. Charge transaction
 
-`Veritrans.transaction.charge(transaction, callback)` - All payment methods that are provided by Veritrans are supported by this module. Example below is using `credit_card` payment type.
+`vt.transaction.charge(transaction, callback)` - All payment methods that are provided by Veritrans are supported by this module. Example below is using `credit_card` payment type.
 
 __Params__:
 
@@ -63,7 +64,7 @@ route.post('/pay', (req, res, next) => {
     };
 
 
-    Veritrans.transaction.charge(transaction, (err, result) => {
+    vt.transaction.charge(transaction, (err, result) => {
         if (err) {
             console.error(err);
 
@@ -77,7 +78,7 @@ route.post('/pay', (req, res, next) => {
 
 #### 2. Check Transaction / Order Status
 
-`Veritrans.transaction.status(id, callback)` - Check the status of transaction / order that is identified by `id`.
+`vt.transaction.status(id, callback)` - Check the status of transaction / order that is identified by `id`.
 
 __Params__:
 
@@ -89,7 +90,7 @@ route.post('/status/:id', (req, res, next) => {
     const id = req.params.id;
 
 
-    Veritrans.transaction.status(id, (err, result) => {
+    vt.transaction.status(id, (err, result) => {
         if (err) {
             console.error(err);
 
@@ -103,7 +104,7 @@ route.post('/status/:id', (req, res, next) => {
 
 #### 3. Capture Transaction
 
-`Veritrans.transaction.capture(payload, callback)` - Charge a pre-authorized transaction in which `transaction_status` is `authorize`.
+`vt.transaction.capture(payload, callback)` - Charge a pre-authorized transaction in which `transaction_status` is `authorize`.
 
 __Params__:
 
@@ -118,7 +119,7 @@ route.get('/capture/:id', (req, res, next) => {
     };
 
 
-    Veritrans.transaction.capture(payload, (err, result) => {
+    vt.transaction.capture(payload, (err, result) => {
         if (err) {
             console.error(err);
 
@@ -132,7 +133,7 @@ route.get('/capture/:id', (req, res, next) => {
 
 #### 4. Approve Transaction
 
-`Veritrans.transaction.approve(id, callback)` - Accept card payment transaction in which the `fraud_status` is `challenge`.
+`vt.transaction.approve(id, callback)` - Accept card payment transaction in which the `fraud_status` is `challenge`.
 
 __Params__:
 
@@ -144,7 +145,7 @@ route.get('/approve/:id', (req, res, next) => {
     const id = req.params.id;
 
 
-    Veritrans.transaction.approve(id, (err, result) => {
+    vt.transaction.approve(id, (err, result) => {
         if (err) {
             console.error(err);
 
@@ -158,7 +159,7 @@ route.get('/approve/:id', (req, res, next) => {
 
 #### 5. Cancel Transaction
 
-`Veritrans.transaction.cancel(id, callback)` - Cancel card payment transaction if the transaction has not been settled yet.
+`vt.transaction.cancel(id, callback)` - Cancel card payment transaction if the transaction has not been settled yet.
 
 __Params__:
 
@@ -170,7 +171,7 @@ route.get('/cancel/:id', (req, res, next) => {
     const id = req.params.id;
 
 
-    Veritrans.transaction.cancel(id, (err, result) => {
+    vt.transaction.cancel(id, (err, result) => {
         if (err) {
             console.error(err);
 
@@ -184,7 +185,7 @@ route.get('/cancel/:id', (req, res, next) => {
 
 #### 6. Expire Transaction
 
-`Veritrans.transaction.expire(id, callback)` - Expire a transaction which payment has not yet completed by the customer.
+`vt.transaction.expire(id, callback)` - Expire a transaction which payment has not yet completed by the customer.
 
 __Params__:
 
@@ -196,7 +197,7 @@ route.get('/expire/:id', (req, res, next) => {
     const id = req.params.id;
 
 
-    Veritrans.transaction.expire(id, (err, result) => {
+    vt.transaction.expire(id, (err, result) => {
         if (err) {
             console.error(err);
 

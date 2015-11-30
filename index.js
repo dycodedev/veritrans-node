@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const utils = require('./lib/utils');
 
-function Veritrans(serverKey) {
+function Veritrans(options) {
     if (!utils.hasProperty(options, ['url', 'clientKey', 'serverKey'])) {
         throw new Error('options must contains url, serverKey and serverKey property!');
     }

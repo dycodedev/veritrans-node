@@ -17,21 +17,5 @@ describe('index.js', () => {
             expect(vt.transaction.status).to.be.a('function');
             expect(vt.transaction.charge).to.be.a('function');
         });
-
-        it('Should have credential property', () => {
-            expect(vt.credential).to.be.an('object');
-            expect(vt.credential).not.to.be.empty;
-        });
-
-        it('Should property change credential property', () => {
-            vt.credential.setServerKey('Aha');
-            expect(vt.credential.getServerKey()).to.equal('Aha');
-
-            vt.credential.setClientKey('Aha');
-            expect(vt.credential.getClientKey()).to.equal('Aha');
-
-            vt.credential.setMerchantId('Id');
-            expect(vt.credential.getMerchantId()).to.equal('Id');
-        });
     });
 });
