@@ -15,11 +15,10 @@ describe('lib/creditcard.js', function() {
     describe('token(payload, callback)', done => {
         it('Should carry error if some payload fields are missing', done => {
             const payload = {
-                'card_number': '4011 1111 1111 1112',
-                'card_cvv': '123',
-                'expiry_month': '01'
+                card_number: '4011 1111 1111 1112',
+                card_cvv: '123',
+                expiry_month: '01',
             };
-
 
             vt.creditcard.token(payload, (err, body) => {
                 expect(err).not.to.be.null;
@@ -31,12 +30,11 @@ describe('lib/creditcard.js', function() {
 
         it('Should carry result if payload is valid', done => {
             const payload = {
-                'card_number': '4011 1111 1111 1112',
-                'card_cvv': '123',
-                'card_exp_month': '01',
-                'card_exp_year': '2020',
+                card_number: '4011 1111 1111 1112',
+                card_cvv: '123',
+                card_exp_month: '01',
+                card_exp_year: '2020',
             };
-
 
             vt.creditcard.token(payload, (err, body) => {
                 expect(err).to.be.null;

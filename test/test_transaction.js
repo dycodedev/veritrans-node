@@ -94,7 +94,7 @@ describe('lib/vt/transaction.js', function() {
                     },
 
                     payment_type: item,
-                    [item]: {}
+                    [item]: {},
                 };
 
                 vt.transaction.charge(payload, (err, body) => {
@@ -142,7 +142,7 @@ describe('lib/vt/transaction.js', function() {
 
         it('Should carry error if payload contains invalid id', done => {
             const payload = {
-                transaction_id: 'notavalidId'
+                transaction_id: 'notavalidId',
             };
 
             vt.transaction.capture(payload, (err, body) => {
