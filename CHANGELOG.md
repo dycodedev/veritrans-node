@@ -3,10 +3,15 @@ Project History
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+### [0.1.3] - 2016-04-16
+
+#### Changed
+* Merged [#4](https://github.com/dycodedev/veritrans-node/pull/4). Thanks to [PhilippeHidayat](https://github.com/PhilippeHidayat).
+
 ### [0.1.2] - 2016-02-16
 
 #### Changed
-* Fixed [#1](https://github.com/dycodedev/veritrans-node/issues/1). Thanks to [sgpagek](https://github.com/sgpagek)
+* Fixed [#1](https://github.com/dycodedev/veritrans-node/issues/1). Thanks to [sgpagek](https://github.com/sgpagek).
 
 ### [0.1.1] - 2015-11-30
 
