@@ -1,6 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
 const utils = require('./lib/utils');
 
 function Veritrans(options) {
@@ -9,9 +8,11 @@ function Veritrans(options) {
     }
 
     this.baseUrl = options.url;
-    this.credentials = _.pick(options, ['serverKey', 'clientKey']);
+    this.credentials = {
+        serverKey: options.serverKey,
+        clientKey: options.clientKey,
+    };
     this.transaction = require('./lib/vt/transaction')(this);
-    this.creditcard = require('./lib/vt/creditcard')(this);
 }
 
 module.exports = Veritrans;

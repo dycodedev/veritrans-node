@@ -16,7 +16,7 @@ const validTransactIds = [
     'Sample Order-2',
 ];
 
-describe('lib/vt/transaction.js', function() {
+describe('lib/vt/transaction.js', function () {
     this.timeout(30000);
 
     describe('status(id, callback)', () => {
