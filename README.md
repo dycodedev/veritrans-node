@@ -209,6 +209,32 @@ route.get('/expire/:id', (req, res, next) => {
 });
 ```
 
+#### 7. Refund Transaction
+
+`vt.transaction.refund(id, callback)` - Cancel the completed / settlement payment.
+
+__Params__:
+
+* `id` (*String*) - Identifier of a transaction / order.
+*  `callback(err, response)` (*Function*) - Callback function that will be called once the refund process is completed.
+
+```js
+route.get('/refund/:id', (req, res, next) => {
+    const id = req.params.id;
+
+
+    vt.transaction.refund(id, (err, result) => {
+        if (err) {
+            console.error(err);
+
+            return res.redirect('/transaction/' + req.params.id);
+        }
+
+        return res.redirect('/transaction/' + req.params.id);
+    });
+});
+```
+
 ### License
 
 MIT License

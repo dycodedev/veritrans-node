@@ -3,6 +3,12 @@ Project History
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+### [0.3.0] - 2017-10-09
+
+#### Added
+
+* Method to refund transaction. ([Jalul](https://github.com/Jalul) [#7](https://github.com/dycodedev/veritrans-node/pull/7))
+
 ### [0.2.0] - 2017-01-18
 
 #### Added
@@ -40,3 +46,4 @@ All notable changes to this project will be documented in this file. This projec
 [0.1.2]: https://github.com/dycodedev/veritrans-node/compare/v0.1.1...v0.1.2
 [0.1.3]: https://github.com/dycodedev/veritrans-node/compare/v0.1.2...v0.1.3
 [0.2.0]: https://github.com/dycodedev/veritrans-node/compare/v0.1.3...v0.2.0
+[0.3.0]: https://github.com/dycodedev/veritrans-node/compare/v0.2.0...v0.3.0
